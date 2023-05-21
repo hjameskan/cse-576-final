@@ -1,0 +1,5 @@
+.DS_Store
+cifar10_dataset
+processed_batches_boxes
+processed_images_boxes
+unprocessed_images
