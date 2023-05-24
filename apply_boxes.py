@@ -34,8 +34,6 @@ download_dir = "cifar10_dataset/"
 #     tar.extractall(path=download_dir)
 
 
-
-
 # 2. LOAD THE CIFAR-10 DATASET TO MEMORY
 
 # Now you can load the dataset from the downloaded and extracted files
@@ -148,3 +146,111 @@ for i, (data_batch, label_batch) in enumerate(zip(processed_batches, label_batch
     }
     with open(os.path.join(processed_batches_dir, f'processed_batch_{i+1}.pickle'), 'wb') as f:
         pickle.dump(output_dict, f)
+
+
+
+# # run cnn to see if it can recognize occluded images of cifar10
+
+# # 6. LOAD THE PROCESSED BATCHES
+
+# # load the processed batches
+# def load_processed_batches():
+#     files = [
+#         'processed_batch_1.pickle', 
+#         'processed_batch_2.pickle', 
+#         'processed_batch_3.pickle', 
+#         'processed_batch_4.pickle', 
+#         'processed_batch_5.pickle'
+#     ]
+    
+#     data = []
+#     labels = []
+
+#     for file in files:
+#         with open(os.path.join(processed_batches_dir, file), 'rb') as f:
+#             processed_batch_dict = pickle.load(f, encoding='bytes')
+#             data.append(processed_batch_dict[b'data'])
+#             labels.append(processed_batch_dict[b'labels'])
+
+#     data = np.concatenate(data)
+#     labels = np.concatenate(labels)
+
+#     return data, labels
+
+# processed_images, processed_labels = load_processed_batches()
+
+# # split the data into training and testing sets
+# X_train, X_test, y_train, y_test = train_test_split(processed_images, processed_labels, test_size=0.2, random_state=42)
+
+# # normalize the data
+# X_train = X_train / 255.0
+# X_test = X_test / 255.0
+# # why 255?
+
+# # one-hot encode the labels
+# y_train = to_categorical(y_train)
+# y_test = to_categorical(y_test)
+
+# # 7. BUILD THE CNN
+
+# # define the model
+# model = Sequential()
+
+# # add the first convolutional layer
+# model.add(Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(32, 32, 3)))
+
+# # add the max pooling layer
+# model.add(MaxPooling2D((2, 2)))
+
+# # add the second convolutional layer
+# model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+
+# # add another max pooling layer
+# model.add(MaxPooling2D((2, 2)))
+
+# # add the third convolutional layer
+# model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+
+# # add another max pooling layer
+# model.add(MaxPooling2D((2, 2)))
+
+# # add the flatten layer
+# model.add(Flatten())
+
+# # add the first dense layer
+# model.add(Dense(64, activation='relu'))
+
+# # add the output layer
+# model.add(Dense(10, activation='softmax'))
+
+# # compile the model
+# model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# # 8. TRAIN THE CNN
+
+# # train the model
+# model.fit(X_train, y_train, epochs=10, batch_size=64, verbose=1, validation_data=(X_test, y_test))
+
+# # 9. EVALUATE THE CNN
+
+# # evaluate the model
+# test_loss, test_acc = model.evaluate(X_test, y_test, verbose=0)
+# print(f'Test loss: {test_loss}')
+# print(f'Test accuracy: {test_acc}')
+
+# # 10. MAKE PREDICTIONS
+
+# # make predictions
+# predictions = model.predict(X_test)
+
+# # get the index of the highest probability
+# y_pred = np.argmax(predictions, axis=1)
+
+# # get the index of the highest probability
+# y_true = np.argmax(y_test, axis=1)
+
+# # get the confusion matrix
+# confusion_matrix(y_true, y_pred)
+
+# # get the classification report
+# print(classification_report(y_true, y_pred))
