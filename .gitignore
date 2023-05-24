@@ -3,3 +3,6 @@ cifar10_dataset
 processed_batches_boxes
 processed_images_boxes
 unprocessed_images
+processed_batches_gaussian_noise
+processed_images_gaussian_noise
+processed_images_noise
