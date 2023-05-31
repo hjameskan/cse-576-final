@@ -6,3 +6,10 @@ unprocessed_images
 processed_batches_gaussian_noise
 processed_images_gaussian_noise
 processed_images_noise
+*.xdv
+*.gz
+*.out
+*.log
+*.fls
+*.fdb_latexmk
+*.aux

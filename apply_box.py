@@ -4,7 +4,7 @@ import urllib.request
 import pickle
 import numpy as np
 from PIL import Image, ImageDraw
-from tensorflow.keras.datasets import cifar10
+# from tensorflow.keras.datasets import cifar10
 
 
 
