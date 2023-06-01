@@ -1,10 +1,14 @@
 .DS_Store
 cifar10_dataset
 processed_batches_boxes
+processed_batches_boxes_test
 processed_images_boxes
+processed_images_boxes_test
 unprocessed_images
 processed_batches_gaussian_noise
+processed_batches_gaussian_noise_test
 processed_images_gaussian_noise
+processed_images_gaussian_noise_test
 processed_images_noise
 *.xdv
 *.gz
@@ -13,3 +17,4 @@ processed_images_noise
 *.fls
 *.fdb_latexmk
 *.aux
+settings.json
